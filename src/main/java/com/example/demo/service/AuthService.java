@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.config.AppConfig;
 import com.example.demo.dto.AuthenticationResponse;
 import com.example.demo.dto.LoginRequest;
 import com.example.demo.dto.RegisterRequest;
@@ -35,7 +34,7 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     private final JwtProvider jwtProvider;
-    private final AppConfig appConfig;
+
     public void signup(RegisterRequest registerRequest) {
         User user = new User();
         user.setEmail(registerRequest.getEmail());
@@ -46,7 +45,7 @@ public class AuthService {
 
 
      String token =  generateVerificationToken(user);
-     String link = appConfig.getUrl() +  "/api/auth/accountVerification/" + token;
+     String link = "http://localhost:8080/api/auth/accountVerification/" + token;
      mailService.sendMail(new NotificationEmail("Please Activate your account",user.getEmail(),
              "Thank you for signing up to Our Project, please click on the below url to activate your account:"+link));
 
